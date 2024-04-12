@@ -702,6 +702,8 @@ static uint8_t  USBD_VIDEO_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
       packet[1] = payload_header[1];
     }
 
+    (void)USBD_LL_FlushEP(pdev, (uint8_t)(epnum | 0x80U));
+
     hVIDEO->uvc_buffer = (uint8_t *)&packet;
     hVIDEO->uvc_size = (uint32_t)PcktSze;
 
